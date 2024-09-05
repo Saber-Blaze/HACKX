@@ -1,22 +1,44 @@
+:root {
+    --primary-color: #4a90e2;
+    --secondary-color: #50c878;
+    --background-color: #f4f7fa;
+    --text-color: #333;
+    --sidebar-bg: #ffffff;
+    --card-bg: #ffffff;
+    --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --transition: all 0.3s ease;
+}
+
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Roboto', Arial, sans-serif;
     margin: 0;
     padding: 0;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    line-height: 1.6;
 }
 
 .dashboard-container {
     display: flex;
-    height: 100vh;
+    min-height: 100vh;
 }
 
 .sidebar {
-    width: 250px;
-    background-color: #f0f0f0;
-    padding: 20px;
+    width: 280px;
+    background: linear-gradient(180deg, var(--sidebar-bg), #e6f2ff);
+    padding: 30px;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+    transition: var(--transition);
+    z-index: 1000;
 }
 
 .logo h2 {
-    margin-bottom: 30px;
+    margin-bottom: 40px;
+    font-size: 28px;
+    color: var(--primary-color);
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 2px;
 }
 
 .nav-links {
@@ -25,24 +47,53 @@ body {
 }
 
 .nav-links li {
-    margin-bottom: 15px;
+    margin-bottom: 20px;
 }
 
 .nav-links a {
     text-decoration: none;
-    color: #333;
+    color: var(--text-color);
     display: flex;
     align-items: center;
+    padding: 12px 15px;
+    border-radius: 8px;
+    transition: var(--transition);
+    position: relative;
+    overflow: hidden;
+    font-weight: 500;
+}
+
+.nav-links a::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: 0.5s;
+}
+
+.nav-links a:hover::before {
+    left: 100%;
 }
 
 .nav-links a.active {
-    font-weight: bold;
-    color: #007bff;
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.icon-overview, .icon-medications, .icon-adherence, .icon-alerts, .icon-reminders, .icon-profile {
+    width: 24px;
+    height: 24px;
+    margin-right: 15px;
+    opacity: 0.7;
 }
 
 .main-content {
     flex-grow: 1;
-    padding: 20px;
+    padding: 30px;
+    overflow-y: auto;
 }
 
 header {
@@ -50,10 +101,26 @@ header {
     justify-content: space-between;
     align-items: center;
     margin-bottom: 30px;
+    background: linear-gradient(135deg, var(--primary-color), #74b9ff);
+    color: white;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: var(--shadow);
 }
 
 .user-actions button {
-    margin-left: 10px;
+    margin-left: 15px;
+    padding: 10px 20px;
+    border-radius: 5px;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.user-actions button:hover {
+    background-color: #2980b9;
 }
 
 .dashboard-section {
@@ -62,27 +129,40 @@ header {
 
 .dashboard-section.active {
     display: block;
+    opacity: 0;
+    animation: fadeIn 0.5s forwards;
 }
 
-/* Add icon styles here */
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+    }
+}
+
+/* Sidebar icons */
 .icon-overview, .icon-medications, .icon-adherence, .icon-alerts, .icon-reminders, .icon-profile {
-    width: 20px;
-    height: 20px;
+    width: 24px;
+    height: 24px;
     margin-right: 10px;
-    /* Add background images for icons */
 }
 
-/* Medications and Adherence Section Styles */
+/* Medications and Adherence Section */
 #medications, #adherence {
     background-color: #ffffff;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.05);
+    padding: 30px;
     margin-top: 20px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+#medications:hover, #adherence:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
 }
 
 #medications h2, #adherence h2 {
-    color: #2c3e50;
+    color: #34495e;
     font-size: 24px;
     margin-bottom: 20px;
     border-bottom: 2px solid #3498db;
@@ -92,14 +172,21 @@ header {
 #medicationTable, .adherence-content {
     width: 100%;
     background-color: #fff;
-    border-radius: 8px;
+    border-radius: 10px;
     overflow: hidden;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
 }
 
 #medicationTable {
     border-collapse: separate;
     border-spacing: 0;
+    width: 100%;
+}
+
+#medicationTable th, #medicationTable td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid #e0e0e0;
 }
 
 .adherence-content {
@@ -110,9 +197,9 @@ header {
 }
 
 .adherence-content > div {
-    background-color: #f8f9fa;
-    padding: 15px;
-    border-radius: 8px;
+    background-color: #f1f2f6;
+    padding: 20px;
+    border-radius: 10px;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
 }
 
@@ -120,7 +207,7 @@ header {
     color: #3498db;
     margin-top: 0;
     margin-bottom: 15px;
-    font-size: 1.2em;
+    font-size: 1.25rem;
 }
 
 .adherence-content p {
@@ -132,33 +219,74 @@ header {
     color: #2c3e50;
 }
 
-#chronicConditionsList {
-    padding-left: 20px;
-    margin: 0;
+/* Button Styles */
+#addMedication, .edit-btn, .save-btn, .cancel-btn, #addCondition, .delete-condition {
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
 }
 
-#chronicConditionsList li {
-    margin-bottom: 5px;
+#addMedication {
+    background-color: #3498db;
+    color: white;
 }
 
-/* ... (table styles remain unchanged) ... */
+#addMedication:hover {
+    background-color: #2980b9;
+}
 
-/* Responsive adjustments */
+.edit-btn {
+    background-color: #3498db;
+    color: white;
+}
+
+.edit-btn:hover {
+    background-color: #2980b9;
+}
+
+.save-btn {
+    background-color: #2ecc71;
+    color: white;
+}
+
+.save-btn:hover {
+    background-color: #27ae60;
+}
+
+.cancel-btn {
+    background-color: #e74c3c;
+    color: white;
+}
+
+.cancel-btn:hover {
+    background-color: #c0392b;
+}
+
+.delete-condition {
+    background-color: #e74c3c;
+    color: white;
+}
+
+.delete-condition:hover {
+    background-color: #c0392b;
+}
+
+/* Responsive Design Adjustments */
 @media (max-width: 1024px) {
     #medicationTable, .adherence-content {
         font-size: 14px;
     }
 
-    #medicationTable th,
-    #medicationTable td,
-    .adherence-content p {
+    #medicationTable th, #medicationTable td, .adherence-content p {
         padding: 12px 10px;
     }
 }
 
 @media (max-width: 768px) {
     #medications, #adherence {
-        padding: 15px;
+        padding: 20px;
     }
 
     #medicationTable {
@@ -167,51 +295,73 @@ header {
         white-space: nowrap;
     }
 
-    #medicationTable th,
-    #medicationTable td {
-        padding: 10px 8px;
-    }
-
     .adherence-content {
         grid-template-columns: 1fr;
     }
 }
 
-/* Add this to your existing CSS */
-.add-medication-form {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 10px;
+/* Overview Section */
+#overview {
+    background-color: #f4f4f8;
+    border-radius: 10px;
+    padding: 30px;
+    margin-top: 20px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.05);
+}
+
+#overview h2 {
+    color: #2c3e50;
+    font-size: 24px;
     margin-bottom: 20px;
+    border-bottom: 2px solid #3498db;
+    padding-bottom: 10px;
 }
 
-.add-medication-form input {
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+.overview-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
 }
 
-#addMedication {
-    grid-column: span 3;
-    padding: 10px;
-    background-color: #3498db;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s;
+.overview-card {
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.05);
+    padding: 20px;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
 }
 
-#addMedication:hover {
-    background-color: #2980b9;
+.overview-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
 }
 
+.overview-card h3 {
+    color: #3498db;
+    font-size: 1.2rem;
+    margin-top: 0;
+    margin-bottom: 15px;
+    border-bottom: 1px solid #e0e0e0;
+    padding-bottom: 10px;
+}
+
+.overview-card p {
+    margin: 10px 0;
+    font-size: 14px;
+}
+
+.overview-card strong {
+    font-weight: 600;
+    color: #2c3e50;
+}
+
+/* Responsive for overview section */
 @media (max-width: 768px) {
-    .add-medication-form {
+    .overview-grid {
         grid-template-columns: 1fr;
     }
 
-    #addMedication {
-        grid-column: span 1;
+    .overview-card {
+        margin-bottom: 20px;
     }
 }

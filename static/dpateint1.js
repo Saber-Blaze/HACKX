@@ -37,6 +37,8 @@ document.addEventListener('DOMContentLoaded', function() {
             populateMedicationTable();
         } else if (sectionId === 'adherence') {
             populateAdherenceSection();
+        } else if (sectionId === 'overview') {
+            populateOverview();
         }
     }
 
@@ -163,12 +165,16 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('weight').textContent = patientData.weight;
         document.getElementById('bloodType').textContent = patientData.blood_type;
 
-        const chronicConditionsList = document.getElementById('chronicConditionsList');
-        chronicConditionsList.innerHTML = '';
-        patientData.chronic_conditions.forEach(condition => {
-            const li = document.createElement('li');
-            li.textContent = condition;
-            chronicConditionsList.appendChild(li);
+        updateChronicConditionsList();
+
+        // Add event listener for adding new condition
+        const addConditionButton = document.getElementById('addCondition');
+        addConditionButton.addEventListener('click', addChronicCondition);
+
+        // Add event listeners for delete buttons
+        const deleteButtons = document.querySelectorAll('.delete-condition');
+        deleteButtons.forEach(button => {
+            button.addEventListener('click', deleteChronicCondition);
         });
     }
 
@@ -203,3 +209,155 @@ function populateMedicationTable() {
     // Implementation for populating medication table
     console.log("Populating medication table");
 }
+
+// Function to handle editing health metrics
+function handleEdit(event) {
+    const field = event.target.dataset.field;
+    const span = document.getElementById(field);
+    const currentValue = span.textContent;
+
+    // Create input field
+    const input = document.createElement('input');
+    input.type = 'text';
+    input.value = currentValue;
+    input.className = 'edit-input';
+
+    // Create save button
+    const saveBtn = document.createElement('button');
+    saveBtn.textContent = 'Save';
+    saveBtn.className = 'save-btn';
+
+    // Create cancel button
+    const cancelBtn = document.createElement('button');
+    cancelBtn.textContent = 'Cancel';
+    cancelBtn.className = 'cancel-btn';
+
+    // Replace span with input and buttons
+    span.innerHTML = '';
+    span.appendChild(input);
+    span.appendChild(saveBtn);
+    span.appendChild(cancelBtn);
+
+    // Hide edit button
+    event.target.style.display = 'none';
+
+    // Add event listeners for save and cancel buttons
+    saveBtn.addEventListener('click', () => saveEdit(field, input.value, span, event.target));
+    cancelBtn.addEventListener('click', () => cancelEdit(field, currentValue, span, event.target));
+}
+
+// Function to save edited value
+function saveEdit(field, newValue, span, editBtn) {
+    patientData[field.toLowerCase()] = newValue;
+    span.textContent = newValue;
+    editBtn.style.display = 'inline';
+}
+
+// Function to cancel edit
+function cancelEdit(field, originalValue, span, editBtn) {
+    span.textContent = originalValue;
+    editBtn.style.display = 'inline';
+}
+
+function updateChronicConditionsList() {
+    const chronicConditionsList = document.getElementById('chronicConditionsList');
+    chronicConditionsList.innerHTML = '';
+    patientData.chronic_conditions.forEach((condition, index) => {
+        const li = document.createElement('li');
+        li.innerHTML = `
+            ${condition}
+            <button class="delete-condition" data-index="${index}">Delete</button>
+        `;
+        chronicConditionsList.appendChild(li);
+    });
+
+    // Add event listeners for delete buttons
+    const deleteButtons = document.querySelectorAll('.delete-condition');
+    deleteButtons.forEach(button => {
+        button.addEventListener('click', deleteChronicCondition);
+    });
+}
+
+function addChronicCondition() {
+    const newConditionInput = document.getElementById('newCondition');
+    const newCondition = newConditionInput.value.trim();
+
+    if (newCondition) {
+        patientData.chronic_conditions.push(newCondition);
+        updateChronicConditionsList();
+        newConditionInput.value = '';
+    } else {
+        alert('Please enter a valid condition');
+    }
+}
+
+function deleteChronicCondition(event) {
+    const index = event.target.dataset.index;
+    patientData.chronic_conditions.splice(index, 1);
+    updateChronicConditionsList();
+}
+
+// Add this function to populate the overview section
+function populateOverview() {
+    document.getElementById('overviewName').textContent = patientData.full_name;
+    document.getElementById('overviewBloodType').textContent = patientData.blood_type;
+    
+    // You can set a mock next appointment date
+    document.getElementById('nextAppointment').textContent = '2024-09-15';
+
+    document.getElementById('totalMedications').textContent = medications.length;
+    
+    // Set a mock next dose
+    document.getElementById('nextDose').textContent = 'Aspirin - Today at 8:00 PM';
+
+    // Populate recent medications
+    const recentMedicationsList = document.getElementById('recentMedications');
+    recentMedicationsList.innerHTML = '';
+    medications.slice(0, 3).forEach(med => {
+        const li = document.createElement('li');
+        li.textContent = `${med.name} - ${med.frequency}`;
+        recentMedicationsList.appendChild(li);
+    });
+
+    // Set mock adherence rate and last missed dose
+    document.getElementById('adherenceRate').textContent = '95%';
+    document.getElementById('lastMissedDose').textContent = '2024-08-28';
+
+    // Populate recent alerts (you can customize this based on your alerts logic)
+    const recentAlertsList = document.getElementById('recentAlertsList');
+    recentAlertsList.innerHTML = '';
+    const mockAlerts = [
+        'Refill needed for Lisinopril',
+        'Upcoming appointment on 2024-09-15',
+        'Blood pressure check due'
+    ];
+    mockAlerts.forEach(alert => {
+        const li = document.createElement('li');
+        li.textContent = alert;
+        recentAlertsList.appendChild(li);
+    });
+
+    // Populate upcoming reminders (you can customize this based on your reminders logic)
+    const upcomingRemindersList = document.getElementById('upcomingRemindersList');
+    upcomingRemindersList.innerHTML = '';
+    const mockReminders = [
+        'Take Aspirin at 8:00 PM',
+        'Blood glucose test tomorrow morning',
+        'Schedule follow-up appointment'
+    ];
+    mockReminders.forEach(reminder => {
+        const li = document.createElement('li');
+        li.textContent = reminder;
+        upcomingRemindersList.appendChild(li);
+    });
+
+    // Populate health metrics
+    document.getElementById('overviewBloodPressure').textContent = patientData.blood_pressure;
+    document.getElementById('overviewHeartRate').textContent = patientData.heart_rate;
+    document.getElementById('overviewWeight').textContent = patientData.weight;
+}
+
+// Call populateOverview when the page loads
+document.addEventListener('DOMContentLoaded', function() {
+    populateOverview();
+});
