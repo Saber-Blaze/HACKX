@@ -17,8 +17,8 @@ document.addEventListener('DOMContentLoaded', function() {
         });
         document.querySelector(`[data-section="${sectionId}"]`).classList.add('active');
 
-        if (sectionId === 'medications' && !document.querySelector('#medicationTable tbody tr')) {
-            populateMedicationTable();
+        if (sectionId === 'medications') {
+            populateMedicationTable(); // Ensure this is called regardless of table content
         } else if (sectionId === 'adherence') {
             populateAdherenceSection();
         }
@@ -38,48 +38,53 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Sample medication data
-    const medications = [
-        {
-            name: "Aspirin",
-            frequency: "Twice daily",
-            duration: "10 days",
-            startDate: "2023-04-01",
-            endDate: "2023-04-10",
-            specialInstructions: "Take with food"
-        },
-        {
-            name: "Lisinopril",
-            frequency: "Once daily",
-            duration: "Until further notice",
-            startDate: "2023-03-15",
-            endDate: "",
-            specialInstructions: "Take in the morning"
-        }
-    ];
+    // const medications = {
+    //     medi: [
+    //         {
+    //             medication_name: "Aspirin",
+    //             frequency: "Once a day",
+    //             dosage: "100mg",
+    //             start_date: "2023-01-01",
+    //             end_date: "2023-12-31",
+    //             instruction: "Take with food"
+    //         },
+    //         // Add more medication objects as needed
+    //     ]
+    // };
 
     // Function to populate the medication table
-    function populateMedicationTable() {
-        const tableBody = document.querySelector("#medicationTable tbody");
-        if (!tableBody) {
-            console.error("Medication table body not found");
-            return;
-        }
+    // function populateMedicationTable() {
+    //     const tableBody = document.querySelector("#medicationTable tbody");
+    //     if (!tableBody) {
+    //         console.error("Medication table body not found");
+    //         return;
+    //     }
 
-        tableBody.innerHTML = ''; // Clear existing rows
+    //     console.log('hello');
+    //     console.log(medications); // Log the medications object
 
-        medications.forEach(med => {
-            const row = document.createElement("tr");
-            row.innerHTML = `
-                <td>${med.name}</td>
-                <td>${med.frequency}</td>
-                <td>${med.duration}</td>
-                <td>${med.startDate}</td>
-                <td>${med.endDate || 'N/A'}</td>
-                <td>${med.specialInstructions}</td>
-            `;
-            tableBody.appendChild(row);
-        });
-    }
+    //     tableBody.innerHTML = ''; // Clear existing rows
+
+    //     // Ensure medications is defined and is an array
+    //     const meds = Array.isArray(medications) ? medications : []; // Updated to use medications directly
+    //     if (meds.length === 0) {
+    //         console.warn("No medications available to display.");
+    //         return; // Exit the function if there are no medications
+    //     }
+
+    //     meds.forEach(med => {
+    //         const row = document.createElement("tr");
+    //         row.innerHTML = `
+    //             <td>${med.medication_name}</td>
+    //             <td>${med.frequency}</td>
+    //             <td>${med.dosage}</td>
+    //             <td>${med.start_date}</td>
+    //             <td>${med.end_date}</td>
+    //             <td>${med.instruction}</td>
+    //         `;
+    //         tableBody.appendChild(row);
+    //     });
+    // }
 
     // Function to populate the adherence section
     function populateAdherenceSection() {
