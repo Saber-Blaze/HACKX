@@ -1,4 +1,4 @@
-**Team - ByteBuddies**
+## **Team - ByteBuddies**
 
 Team Leader - Siddharth Shukla
 
