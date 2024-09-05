@@ -1,0 +1,178 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.dashboard-container {
+    display: flex;
+    height: 100vh;
+}
+
+.sidebar {
+    width: 250px;
+    background-color: #f0f0f0;
+    padding: 20px;
+}
+
+.logo h2 {
+    margin-bottom: 30px;
+}
+
+.nav-links {
+    list-style-type: none;
+    padding: 0;
+}
+
+.nav-links li {
+    margin-bottom: 15px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #333;
+    display: flex;
+    align-items: center;
+}
+
+.nav-links a.active {
+    font-weight: bold;
+    color: #007bff;
+}
+
+.main-content {
+    flex-grow: 1;
+    padding: 20px;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.user-actions button {
+    margin-left: 10px;
+}
+
+.dashboard-section {
+    display: none;
+}
+
+.dashboard-section.active {
+    display: block;
+}
+
+/* Add icon styles here */
+.icon-overview, .icon-medications, .icon-adherence, .icon-alerts, .icon-reminders, .icon-profile {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+    /* Add background images for icons */
+}
+
+/* Medications and Adherence Section Styles */
+#medications, #adherence {
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 25px;
+    margin-top: 20px;
+}
+
+#medications h2, #adherence h2 {
+    color: #2c3e50;
+    font-size: 24px;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #3498db;
+    padding-bottom: 10px;
+}
+
+#medicationTable, .adherence-content {
+    width: 100%;
+    background-color: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+#medicationTable {
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+.adherence-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    padding: 20px;
+}
+
+.adherence-content > div {
+    background-color: #f8f9fa;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+}
+
+.adherence-content h3 {
+    color: #3498db;
+    margin-top: 0;
+    margin-bottom: 15px;
+    font-size: 1.2em;
+}
+
+.adherence-content p {
+    margin: 10px 0;
+}
+
+.adherence-content strong {
+    font-weight: 600;
+    color: #2c3e50;
+}
+
+#chronicConditionsList {
+    padding-left: 20px;
+    margin: 0;
+}
+
+#chronicConditionsList li {
+    margin-bottom: 5px;
+}
+
+/* ... (table styles remain unchanged) ... */
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+    #medicationTable, .adherence-content {
+        font-size: 14px;
+    }
+
+    #medicationTable th,
+    #medicationTable td,
+    .adherence-content p {
+        padding: 12px 10px;
+    }
+}
+
+@media (max-width: 768px) {
+    #medications, #adherence {
+        padding: 15px;
+    }
+
+    #medicationTable {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+
+    #medicationTable th,
+    #medicationTable td {
+        padding: 10px 8px;
+    }
+
+    .adherence-content {
+        grid-template-columns: 1fr;
+    }
+}

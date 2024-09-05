@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patient Dashboard - healthBridge</title>
+    <link rel="stylesheet" href="dpateint1.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <nav class="sidebar">
+            <div class="logo">
+                <h2>healthBridge</h2>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#overview" class="active" data-section="overview"><i class="icon-overview"></i> Overview</a></li>
+                <li><a href="#medications" data-section="medications"><i class="icon-medications"></i> Medications</a></li>
+                <li><a href="#adherence" data-section="adherence"><i class="icon-adherence"></i> Adherence</a></li>
+                <li><a href="#alerts"><i class="icon-alerts"></i> Alerts</a></li>
+                <li><a href="#reminders"><i class="icon-reminders"></i> Reminders</a></li>
+                <li><a href="#profile"><i class="icon-profile"></i> Profile</a></li>
+            </ul>
+        </nav>
+        <main class="main-content">
+            <header>
+                <h1>Welcome, [Patient Name]</h1>
+                <div class="user-actions">
+                    
+                    <button class="logout">Logout</button>
+                </div>
+            </header>
+            <section id="overview" class="dashboard-section active">
+                <h2>Overview</h2>
+                <!-- Add overview content here -->
+            </section>
+            <section id="medications" class="dashboard-section">
+                <h2>Current Medications</h2>
+                <div class="add-medication-form">
+                    <input type="text" id="medName" placeholder="Medication Name">
+                    <input type="text" id="medFrequency" placeholder="Frequency">
+                    <input type="text" id="medDuration" placeholder="Duration">
+                    <input type="date" id="medStartDate" placeholder="Start Date">
+                    <input type="date" id="medEndDate" placeholder="End Date">
+                    <input type="text" id="medInstructions" placeholder="Special Instructions">
+                    <button id="addMedication">Add Medication</button>
+                </div>
+                <table id="medicationTable">
+                    <thead>
+                        <tr>
+                            <th>Medication Name</th>
+                            <th>Frequency</th>
+                            <th>Duration</th>
+                            <th>Start Date</th>
+                            <th>End Date</th>
+                            <th>Special Instructions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Medication rows will be added here by JavaScript -->
+                    </tbody>
+                </table>
+            </section>
+            <section id="adherence" class="dashboard-section">
+                <h2>Adherence Information</h2>
+                <div class="adherence-content">
+                    <div class="patient-info">
+                        <h3>Patient's Basic Information</h3>
+                        <p><strong>Name:</strong> <span id="patientName"></span></p>
+                        <p><strong>Date of Birth:</strong> <span id="patientDOB"></span></p>
+                        <p><strong>Gender:</strong> <span id="patientGender"></span></p>
+                        <p><strong>Phone:</strong> <span id="patientPhone"></span></p>
+                        <p><strong>Email:</strong> <span id="patientEmail"></span></p>
+                        <p><strong>Emergency Contact:</strong> <span id="emergencyContact"></span></p>
+                    </div>
+                    <div class="health-metrics">
+                        <h3>Health Metrics</h3>
+                        <p><strong>Blood Pressure:</strong> <span id="bloodPressure"></span></p>
+                        <p><strong>Body Temperature:</strong> <span id="bodyTemperature"></span></p>
+                        <p><strong>Heart Rate:</strong> <span id="heartRate"></span></p>
+                        <p><strong>Respiratory Rate:</strong> <span id="respiratoryRate"></span></p>
+                        <p><strong>Height:</strong> <span id="height"></span></p>
+                        <p><strong>Weight:</strong> <span id="weight"></span></p>
+                    </div>
+                    <div class="chronic-conditions">
+                        <h3>Chronic Conditions</h3>
+                        <ul id="chronicConditionsList"></ul>
+                    </div>
+                    <div class="blood-type">
+                        <h3>Blood Type</h3>
+                        <p><span id="bloodType"></span></p>
+                    </div>
+                </div>
+            </section>
+            <!-- Add other sections (adherence, etc.) here -->
+        </main>
+    </div>
+    <script src="dpateint1.js"></script>
+</body>
+</html>

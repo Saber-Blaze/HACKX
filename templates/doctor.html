@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doctor Dashboard - healthBridge</title>
+    <link rel="stylesheet" href="doctor.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <nav class="sidebar">
+            <div class="logo">
+                <h2>healthBridge</h2>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#overview" class="active"><i class="icon-overview"></i> Overview</a></li>
+                <li><a href="#patients"><i class="icon-patients"></i> Patients</a></li>
+                <li><a href="#appointments"><i class="icon-appointments"></i> Appointments</a></li>
+                <li><a href="#messages"><i class="icon-messages"></i> Messages</a></li>
+                <li><a href="#profile"><i class="icon-profile"></i> Profile</a></li>
+            </ul>
+        </nav>
+        <main class="main-content">
+            <header>
+                <h1>Hello, Doctor [Name]</h1>
+                <div class="user-actions">
+                    <button class="notifications">Notifications</button>
+                    <button class="logout">Logout</button>
+                </div>
+            </header>
+            <section id="overview" class="dashboard-section">
+                <h2>Overview</h2>
+                <!-- Add overview content here -->
+            </section>
+            <section id="patients" class="dashboard-section">
+                <h2>Patients</h2>
+                <ul class="patient-list">
+                    <li><a href="dpateint1.html">Patient 1</a></li>
+                    <li><a href="#">Patient 2</a></li>
+                    <li><a href="#">Patient 3</a></li>
+                </ul>
+            </section>
+            <!-- Add other sections (appointments, messages, etc.) here -->
+        </main>
+    </div>
+    <script src="doctor.js"></script>
+</body>
+</html>

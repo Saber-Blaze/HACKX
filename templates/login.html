@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EHR System Login</title>
+    <link rel="stylesheet" href="login.css">
+</head>
+<body>
+    <div class="container">
+        <div class="login-wrapper">
+            <div class="logo-section">
+                <svg class="account-icon" xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                    <circle cx="12" cy="7" r="4"></circle>
+                </svg>
+                <h1>healthBridge</h1>
+            </div>
+            <div class="card">
+                <div class="card-header">
+                    <h2>Login</h2>
+                    <p>Enter your username and password to access the EHR system.</p>
+                </div>
+                <div class="card-content">
+                    <div class="input-group">
+                        <label for="username">Username</label>
+                        <input id="username" type="text" placeholder="Enter your username" required>
+                    </div>
+                    <div class="input-group">
+                        <div class="password-header">
+                            <label for="password">Password</label>
+                            <a href="forgot-password.html" class="forgot-password">Forgot password?</a>
+                        </div>
+                        <input id="password" type="password" placeholder="Enter your password" required>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <button type="submit" id="loginButton">Login</button>
+                </div>
+            </div>
+            <p class="signup-text">Don't have an account? <a href="#">Sign up</a></p>
+            <div class="footer-links">
+                <a href="#">Terms of Service</a>
+                <a href="#">Privacy Policy</a>
+            </div>
+        </div>
+    </div>
+    <script src="login.js"></script>
+</body>
+</html>
