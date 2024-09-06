@@ -48,9 +48,9 @@ document.addEventListener('DOMContentLoaded', function() {
             console.warn(`Nav link for section '${sectionId}' not found`);
         }
 
-        if (sectionId === 'medications') {
-            populateMedicationTable(); // Ensure this is called regardless of table content
-
+        // Handle specific section behaviors
+        if (sectionId === 'medications' && !document.querySelector('#medicationTable tbody tr')) {
+            populateMedicationTable();
         } else if (sectionId === 'adherence') {
             populateAdherenceSection();
         } else if (sectionId === 'reminders') {
@@ -99,56 +99,37 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Sample medication data
-
-    // const medications = {
-    //     medi: [
-    //         {
-    //             medication_name: "Aspirin",
-    //             frequency: "Once a day",
-    //             dosage: "100mg",
-    //             start_date: "2023-01-01",
-    //             end_date: "2023-12-31",
-    //             instruction: "Take with food"
-    //         },
-    //         // Add more medication objects as needed
-    //     ]
-    // };
-
+    const medications =[
+    {
+        "medication_name": "Acetaminophen",
+        "frequency": 3,
+        "dosage": 5,
+        "start_date": "2024-09-05",
+        "end_date": "2024-09-10",
+        "instruction": "after every meal"
+    },
+    {
+        "medication_name": "Antibiotics",
+        "frequency": 1,
+        "dosage": 3,
+        "start_date": "2024-09-05",
+        "end_date": "2024-09-08",
+        "instruction": "every morning empty stomach"
+    }
+]
 
     // Function to populate the medication table
-    // function populateMedicationTable() {
-    //     const tableBody = document.querySelector("#medicationTable tbody");
-    //     if (!tableBody) {
-    //         console.error("Medication table body not found");
-    //         return;
-    //     }
+    function populateMedicationTable() {
+        const tableBody = document.querySelector("#medicationTable tbody");
+        if (!tableBody) {
+            console.error("Medication table body not found");
+            return;
+        }
 
-
-    //     console.log('hello');
-    //     console.log(medications); // Log the medications object
-
-    //     tableBody.innerHTML = ''; // Clear existing rows
-
-    //     // Ensure medications is defined and is an array
-    //     const meds = Array.isArray(medications) ? medications : []; // Updated to use medications directly
-    //     if (meds.length === 0) {
-    //         console.warn("No medications available to display.");
-    //         return; // Exit the function if there are no medications
-    //     }
-
-    //     meds.forEach(med => {
-    //         const row = document.createElement("tr");
-    //         row.innerHTML = `
-    //             <td>${med.medication_name}</td>
-    //             <td>${med.frequency}</td>
-    //             <td>${med.dosage}</td>
-    //             <td>${med.start_date}</td>
-    //             <td>${med.end_date}</td>
-    //             <td>${med.instruction}</td>
-    //         `;
-    //         tableBody.appendChild(row);
-    //     });
-    // }
+       
+        
+        console.log(`Populated medication table with ${medications.length} medications`);
+    }
 
     // Function to populate the adherence section
     function populateAdherenceSection() {

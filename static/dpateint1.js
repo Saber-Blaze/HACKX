@@ -176,6 +176,9 @@ document.addEventListener('DOMContentLoaded', function() {
         deleteButtons.forEach(button => {
             button.addEventListener('click', deleteChronicCondition);
         });
+
+        // Call setupEditButtons after populating the data
+        setupEditButtons();
     }
 
     // Initialize the dashboard with overview section
@@ -296,6 +299,26 @@ function deleteChronicCondition(event) {
     patientData.chronic_conditions.splice(index, 1);
     updateChronicConditionsList();
 }
+
+// Add this function to your existing JavaScript file
+function setupEditButtons() {
+    const editButtons = document.querySelectorAll('.edit-btn');
+    editButtons.forEach(button => {
+        button.addEventListener('click', handleEdit);
+    });
+}
+
+// Add this to your DOMContentLoaded event listener
+document.addEventListener('DOMContentLoaded', function() {
+    // ... existing code ...
+
+    // Call populateAdherenceSection when the adherence section is active
+    if (document.getElementById('adherence').classList.contains('active')) {
+        populateAdherenceSection();
+    }
+
+    // ... rest of the existing code ...
+});
 
 // Add this function to populate the overview section
 function populateOverview() {

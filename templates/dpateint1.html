@@ -10,20 +10,18 @@
     <div class="dashboard-container">
         <nav class="sidebar">
             <div class="logo">
-                <h2>SAFEDOSE</h2>
+                <h2>healthBridge</h2>
             </div>
             <ul class="nav-links">
                 <li><a href="#overview" class="active" data-section="overview"><i class="icon-overview"></i> Overview</a></li>
                 <li><a href="#medications" data-section="medications"><i class="icon-medications"></i> Medications</a></li>
                 <li><a href="#adherence" data-section="adherence"><i class="icon-adherence"></i> Adherence</a></li>
-                <li><a href="#alerts"><i class="icon-alerts"></i> Alerts</a></li>
-                <li><a href="#reminders"><i class="icon-reminders"></i> Reminders</a></li>
-                <li><a href="#profile"><i class="icon-profile"></i> Profile</a></li>
+               
             </ul>
         </nav>
         <main class="main-content">
             <header>
-                <h1>Welcome, [Patient Name]</h1>
+                <h1>Welcome, <span id="patientNameHeader"></span></h1>
                 <div class="user-actions">
                     
                     <button class="logout">Logout</button>
@@ -31,7 +29,22 @@
             </header>
             <section id="overview" class="dashboard-section active">
                 <h2>Overview</h2>
-                <!-- Add overview content here -->
+                <div class="overview-grid">
+                    <div class="overview-card" id="quick-info">
+                        <h3>Quick Info</h3>
+                        <p><strong>Name:</strong> <span id="overviewName"></span></p>
+                        <p><strong>Blood Type:</strong> <span id="overviewBloodType"></span></p>
+                        <p><strong>Next Appointment:</strong> <span id="nextAppointment"></span></p>
+                    </div>
+                    <div class="overview-card" id="medication-summary">
+                        <h3>Medication Summary</h3>
+                        <p><strong>Total Medications:</strong> <span id="totalMedications"></span></p>
+                        <p><strong>Next Dose:</strong> <span id="nextDose"></span></p>
+                        <h4>Recent Medications:</h4>
+                        <ul id="recentMedications"></ul>
+                    </div>
+                   
+                </div>
             </section>
             <section id="medications" class="dashboard-section">
                 <h2>Current Medications</h2>
@@ -74,16 +87,20 @@
                     </div>
                     <div class="health-metrics">
                         <h3>Health Metrics</h3>
-                        <p><strong>Blood Pressure:</strong> <span id="bloodPressure"></span></p>
-                        <p><strong>Body Temperature:</strong> <span id="bodyTemperature"></span></p>
-                        <p><strong>Heart Rate:</strong> <span id="heartRate"></span></p>
-                        <p><strong>Respiratory Rate:</strong> <span id="respiratoryRate"></span></p>
-                        <p><strong>Height:</strong> <span id="height"></span></p>
-                        <p><strong>Weight:</strong> <span id="weight"></span></p>
+                        <p>Blood Pressure: <span id="bloodPressure"></span> <button class="edit-btn" data-field="bloodPressure">Edit</button></p>
+                        <p>Body Temperature: <span id="bodyTemperature"></span> <button class="edit-btn" data-field="bodyTemperature">Edit</button></p>
+                        <p>Heart Rate: <span id="heartRate"></span> <button class="edit-btn" data-field="heartRate">Edit</button></p>
+                        <p>Respiratory Rate: <span id="respiratoryRate"></span> <button class="edit-btn" data-field="respiratoryRate">Edit</button></p>
+                        <p><strong>Height:</strong> <span id="height"></span> <button class="edit-btn" data-field="height">Edit</button></p>
+                        <p><strong>Weight:</strong> <span id="weight"></span> <button class="edit-btn" data-field="weight">Edit</button></p>
                     </div>
                     <div class="chronic-conditions">
                         <h3>Chronic Conditions</h3>
                         <ul id="chronicConditionsList"></ul>
+                        <div class="add-condition">
+                            <input type="text" id="newCondition" placeholder="Enter new condition">
+                            <button id="addCondition">Add Condition</button>
+                        </div>
                     </div>
                     <div class="blood-type">
                         <h3>Blood Type</h3>

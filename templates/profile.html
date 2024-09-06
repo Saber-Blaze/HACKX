@@ -1,11 +1,10 @@
-{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Patient Dashboard - healthBridge</title>
-    <link rel="stylesheet" href="{% static 'profile.css' %}">
+    <link rel="stylesheet" href="profile.css">
 </head>
 <body>
     <div class="dashboard-container">
@@ -17,22 +16,54 @@
                 <li><a href="#overview" class="active" data-section="overview"><i class="icon-overview"></i> Overview</a></li>
                 <li><a href="#medications" data-section="medications"><i class="icon-medications"></i> Medications</a></li>
                 <li><a href="#adherence" data-section="adherence"><i class="icon-adherence"></i> Adherence</a></li>
-                <li><a href="#alerts"><i class="icon-alerts"></i> Alerts</a></li>
-                <li><a href="#reminders"><i class="icon-reminders"></i> Reminders</a></li>
-                <li><a href="#profile"><i class="icon-profile"></i> Profile</a></li>
+                <li><a href="#alerts" data-section="alerts"><i class="icon-alerts"></i> Alerts</a></li>
+                <li><a href="#reminders" data-section="reminders"><i class="icon-reminders"></i> Reminders</a></li>
+                
             </ul>
         </nav>
         <main class="main-content">
             <header>
-                <h1>Welcome, {{patient.full_name}}</h1>
+                <h1>Welcome, [Patient Name]</h1>
                 <div class="user-actions">
-
+                    
                     <button class="logout">Logout</button>
                 </div>
             </header>
             <section id="overview" class="dashboard-section active">
                 <h2>Overview</h2>
-                <!-- Add overview content here -->
+                <div class="overview-grid">
+                    <div class="overview-card" id="quick-info">
+                        <h3>Quick Info</h3>
+                        <p><strong>Name:</strong> <span id="overviewName"></span></p>
+                        <p><strong>Blood Type:</strong> <span id="overviewBloodType"></span></p>
+                        <p><strong>Next Appointment:</strong> <span id="nextAppointment"></span></p>
+                    </div>
+                    <div class="overview-card" id="medication-summary">
+                        <h3>Medication Summary</h3>
+                        <p><strong>Total Medications:</strong> <span id="totalMedications"></span></p>
+                        <p><strong>Next Dose:</strong> <span id="nextDose"></span></p>
+                        <ul id="recentMedications"></ul>
+                    </div>
+                    <div class="overview-card" id="adherence-summary">
+                        <h3>Adherence Summary</h3>
+                        <p><strong>Adherence Rate:</strong> <span id="adherenceRate"></span></p>
+                        <p><strong>Last Missed Dose:</strong> <span id="lastMissedDose"></span></p>
+                    </div>
+                    <div class="overview-card" id="alerts-summary">
+                        <h3>Recent Alerts</h3>
+                        <ul id="recentAlertsList"></ul>
+                    </div>
+                    <div class="overview-card" id="upcoming-reminders">
+                        <h3>Upcoming Reminders</h3>
+                        <ul id="upcomingRemindersList"></ul>
+                    </div>
+                    <div class="overview-card" id="health-metrics">
+                        <h3>Recent Health Metrics</h3>
+                        <p><strong>Blood Pressure:</strong> <span id="overviewBloodPressure"></span></p>
+                        <p><strong>Heart Rate:</strong> <span id="overviewHeartRate"></span></p>
+                        <p><strong>Weight:</strong> <span id="overviewWeight"></span></p>
+                    </div>
+                </div>
             </section>
             <section id="medications" class="dashboard-section">
                 <h2>Current Medications</h2>
@@ -46,9 +77,17 @@
                             <th>End Date</th>
                             <th>Special Instructions</th>
                         </tr>
+                        <tr>
+                            <th>...</th>
+                            <th>...</th>
+                            <th>...</th>
+                            <th>...</th>
+                            <th>...</th>
+                            <th>...</th>
+                        </tr>
                     </thead>
                     <tbody>
-                        <!-- Medication rows will be added here by JavaScript -->
+                        
                     </tbody>
                 </table>
             </section>
@@ -83,27 +122,38 @@
                     </div>
                 </div>
             </section>
+            <section id="alerts" class="dashboard-section">
+                <h2>Alerts</h2>
+                <div id="alertsContainer">
+                    <div id="adherenceAlerts">
+                       
+                        
+                    </div>
+                    <div id="refillAlerts">
+                        <h3>Refill Alerts</h3>
+                        <ul id="refillAlertsList"></ul>
+                    </div>
+                </div>
+            </section>
+            <section id="reminders" class="dashboard-section">
+                <h2>Reminders</h2>
+                <div id="reminderContainer">
+                    <input type="text" id="reminderInput" placeholder="Enter your reminder">
+                    <input type="datetime-local" id="reminderDateTime">
+                    <button id="addReminderBtn">Add Reminder</button>
+                </div>
+                <div id="recentReminders">
+                    <h3>Scheduled Reminders</h3>
+                    <ul id="reminderList"></ul>
+                </div>
+            </section>
+            <section id="profile" class="dashboard-section">
+                <h2>Profile</h2>
+                <!-- Profile content -->
+            </section>
             <!-- Add other sections (adherence, etc.) here -->
         </main>
     </div>
-    <script>
-        const patientData = {
-            full_name: "{{ patient.full_name }}",
-            date_of_birth: "{{ patient.date_of_birth }}",
-            gender: "{{ patient.gender }}",
-            phone_number: "{{ patient.phone_number }}",
-            email: "{{ patient.email }}",
-            emergency_contact_number: "{{ patient.emergency_contact_number }}",
-            blood_pressure: "{{ patient.blood_pressure }}",
-            body_temperature: "{{ patient.body_temperature }}",
-            heart_rate: "{{ patient.heart_rate }}",
-            respiratory_rate: "{{ patient.respiratory_rate }}",
-            height: "{{ patient.height }}",
-            weight: "{{ patient.weight }}",
-            chronic_conditions: "{{ patient.chronic_conditions|safe }}",
-            blood_type: "{{ patient.blood_type }}"
-        };
-    </script>
-    <script src="{% static 'profile.js' %}"></script>
+    <script src="profile.js"></script>
 </body>
 </html>

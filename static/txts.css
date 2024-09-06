@@ -15,7 +15,7 @@ body{
 .page1{
     height:100vh;
     width:100%;
-    background-color:whitesmoke;
+    background-color:#D1CCC1;
 
 *{
   margin:0;
@@ -65,6 +65,9 @@ nav{
   display:flex;
   align-items:center;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  position: absolute;
+  top:0;
+
 }
 }
 
@@ -210,7 +213,7 @@ nav{
 .login-buttons {
   display: flex;
   justify-content: center;
-  gap: 20px;
+  gap: 120px;
   margin-top: 30px;
 }
 
@@ -228,13 +231,28 @@ nav{
 }
 
 #patient-login {
-  background-color: #4CAF50;
-  color: white;
+  background-color: transparent;
+  color: black;
+  border-color: #161616;
+  
+  border-width: 2px;
+  scale:1.5;
+  box-shadow: 0 0 0 2px #161616;
+  transition: box-shadow 0.3s ease;
+
+
 }
 
 #doctor-login {
-  background-color: #2196F3;
-  color: white;
+  background-color: transparent;
+  color: black;
+  border-color: #161616;
+  border-width: 2px;
+  scale:1.5;
+  border-width: 2px;
+  scale:1.5;
+  box-shadow: 0 0 0 2px #161616;
+  transition: box-shadow 0.3s ease;
 }
 
 .login-buttons button:hover {
@@ -245,4 +263,24 @@ nav{
 .login-buttons button:active {
   transform: translateY(-1px);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+#rippleCanvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.page1 {
+  position: relative;
+  overflow: hidden;
+}
+
+.website-content {
+  position: relative;
+  z-index: 2;
 }
